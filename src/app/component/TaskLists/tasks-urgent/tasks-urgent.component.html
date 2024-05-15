@@ -1,0 +1,18 @@
+<div class="task-items">
+    @for (task of listOfTasks; track task)
+    {
+        @if(task.priority == 'urgent')
+        {
+            <a>
+                <div class="task-info" draggable="true">
+                    <h3>{{task.title}}</h3>
+                    <!-- <p>{{task.description}}</p>
+                    <p>{{task.priority}}</p> -->
+                </div>
+            </a>
+        }
+        @else{
+            
+        }
+    }
+</div>
