@@ -1,4 +1,7 @@
-<div class="task-items" cdkDropList #donelist="cdkDropList">
+<div class="task-items" 
+    cdkDropList 
+    id="LowTaskList"
+    [cdkDropListData]="">
     @for (task of listOfTasks; track task)
     {
     @if(task.priority == 'low')
@@ -14,8 +17,6 @@
     </div>
 
     }
-    @else{
-
-    }
+    
     }
 </div>
