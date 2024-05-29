@@ -45,4 +45,8 @@ export class TestComponent {
       );
     }
   }
+
+  taskClicked(){
+    console.log("item clicked");
+  }
 }
