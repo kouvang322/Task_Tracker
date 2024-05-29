@@ -1,0 +1,92 @@
+<div cdkDropListGroup>
+
+  <div class="example-container">
+    <h2>Low</h2>
+  
+    <div
+      cdkDropList
+      #taskLowList="cdkDropList"
+      [cdkDropListData]="lowTasks"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      @for (item of lowTasks; track item) {
+        <div class="example-box" cdkDrag>{{item.title}}</div>
+      }
+    </div>
+
+  </div>
+
+    <div class="example-container">
+      <h2>Medium</h2>
+    
+      <div
+        cdkDropList
+        #taskMediumList="cdkDropList"
+        [cdkDropListData]="medTasks"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (item of medTasks; track item) {
+          <div class="example-box" cdkDrag>{{item.title}}</div>
+        }
+      </div>
+    </div>
+    <div class="example-container">
+      <h2>High</h2>
+    
+      <div
+        cdkDropList
+        #taskHighList="cdkDropList"
+        [cdkDropListData]="highTasks"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (item of highTasks; track item) {
+          <div class="example-box" cdkDrag>{{item.title}}</div>
+        }
+      </div>
+    </div>
+    <div class="example-container">
+      <h2>Urgent</h2>
+    
+      <div
+        cdkDropList
+        #taskUrgentList="cdkDropList"
+        [cdkDropListData]="urgentTasks"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (item of urgentTasks; track item) {
+          <div class="example-box" cdkDrag>{{item.title}}</div>
+        }
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h2>In Progress</h2>
+    
+      <div
+        cdkDropList
+        #taskInProgressList="cdkDropList"
+        [cdkDropListData]="inProgressTasks"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (item of inProgressTasks; track item) {
+          <div class="example-box" cdkDrag>{{item.title}}</div>
+        }
+      </div>
+    </div>
+
+    <div class="example-container">
+      <h2>Completed</h2>
+    
+      <div
+        cdkDropList
+        #taskCompletedList="cdkDropList"
+        [cdkDropListData]="completedTasks"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (item of completedTasks; track item) {
+          <div class="example-box" cdkDrag>{{item.title}}</div>
+        }
+      </div>
+    </div>
+
+  </div>
