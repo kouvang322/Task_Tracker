@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Client } from 'pg';
 
 @Injectable({
@@ -6,19 +7,19 @@ import { Client } from 'pg';
 })
 export class NeonDbService {
 
-  private client: Client;
+  // private client: Client;
   
-  constructor() {
-    this.client = new Client({
-      connectionString:"postgresql://My-ListOfTasks_owner:TAGXKLeP3Wr7@ep-rough-bar-a5rs74sk.us-east-2.aws.neon.tech/My-ListOfTasks?sslmode=require"
-    });
+  constructor(private http: HttpClient) {
+    // this.client = new Client({
+    //   connectionString:
+    // });
     
-    this.client.connect();
+    // this.client.connect();
     
   }
 
   connectToDatabase(){
-    
+
 
   }
   
