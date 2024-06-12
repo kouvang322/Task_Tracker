@@ -2,7 +2,7 @@ import { Task } from "../interfaces/Task";
 
 export const tasksList: Task[] = [
     {
-        task_Id: 1,
+        id: 1,
         title: "Do Something",
         description: "do this now",
         priority: "low",
@@ -10,7 +10,7 @@ export const tasksList: Task[] = [
     },
 
     {
-        task_Id: 2,
+        id: 2,
         title: "Do Something Else",
         description: "also do this now",
         priority: "medium",
@@ -18,7 +18,7 @@ export const tasksList: Task[] = [
     },
 
     {
-        task_Id: 3,
+        id: 3,
         title: "High Task",
         description: "important task",
         priority: "high",
@@ -26,7 +26,7 @@ export const tasksList: Task[] = [
     },
 
     {
-        task_Id: 4,
+        id: 4,
         title: "Urgent Task",
         description: "Hurry, do this task",
         priority: "urgent",

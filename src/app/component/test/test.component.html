@@ -1,3 +1,4 @@
+<button (click)="addNewTask()">Add New Task</button>
 <div cdkDropListGroup>
 
   <div class="priority-container">
@@ -10,7 +11,11 @@
       class="task-list"
       (cdkDropListDropped)="drop($event)">
       @for (item of lowTasks; track item) {
-        <div class="task-item" cdkDrag [cdkDragData]="item" (click)="taskClicked()">{{item.title}}</div>
+        <div class="task-item" cdkDrag [cdkDragData]="item">
+          {{item.title}}
+          <button (click)="taskClicked()">View Task</button>
+          <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+        </div>
       }
     </div>
 
@@ -26,7 +31,12 @@
         class="task-list"
         (cdkDropListDropped)="drop($event)">
         @for (item of medTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item" (click)="taskClicked()">{{item.title}}</div>
+          <div class="task-item" cdkDrag [cdkDragData]="item">
+            {{item.title}}
+            <button (click)="taskClicked()">View Task</button>
+            <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+          </div>
+          
         }
       </div>
     </div>
@@ -40,7 +50,12 @@
         class="task-list"
         (cdkDropListDropped)="drop($event)">
         @for (item of highTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item" (click)="taskClicked()">{{item.title}}</div>
+          <div class="task-item" cdkDrag [cdkDragData]="item">
+            {{item.title}}
+            <button (click)="taskClicked()">View Task</button>
+            <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+          </div>
+          
         }
       </div>
     </div>
@@ -54,7 +69,12 @@
         class="task-list"
         (cdkDropListDropped)="drop($event)">
         @for (item of urgentTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item" (click)="taskClicked()">{{item.title}}</div>
+          <div class="task-item" cdkDrag [cdkDragData]="item">
+            {{item.title}}
+            <button (click)="taskClicked()">View Task</button>
+            <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+          </div>
+          
         }
       </div>
     </div>
@@ -69,7 +89,12 @@
         class="task-list"
         (cdkDropListDropped)="drop($event)">
         @for (item of inProgressTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item" (click)="taskClicked()">{{item.title}}</div>
+          <div class="task-item" cdkDrag [cdkDragData]="item">
+            {{item.title}}
+            <button (click)="taskClicked()">View Task</button>
+            <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+          </div>
+          
         }
       </div>
     </div>
@@ -84,7 +109,12 @@
         class="task-list"
         (cdkDropListDropped)="drop($event)">
         @for (item of completedTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item" (click)="taskClicked()">{{item.title}}</div>
+          <div class="task-item" cdkDrag [cdkDragData]="item">
+            {{item.title}}
+            <button (click)="taskClicked()">View Task</button>
+            <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+          </div>
+          
         }
       </div>
     </div>
