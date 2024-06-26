@@ -1,9 +1,10 @@
-<button (click)="addNewTask()">Add New Task</button>
+<button mat-button style="background-color: green
+;" (click)="openCreateDialog()">Add New Task</button>
 <div cdkDropListGroup>
 
   <div class="priority-container">
     <h2>Low</h2>
-  
+    
     <div
       cdkDropList
       id="low"
@@ -13,8 +14,8 @@
       @for (item of lowTasks; track item) {
         <div class="task-item" cdkDrag [cdkDragData]="item">
           {{item.title}}
-          <button (click)="taskClicked()">View Task</button>
-          <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+          <button (click)="openViewTaskDialog(item)">View Task</button>
+          <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete Task</button>
         </div>
       }
     </div>
@@ -33,8 +34,8 @@
         @for (item of medTasks; track item) {
           <div class="task-item" cdkDrag [cdkDragData]="item">
             {{item.title}}
-            <button (click)="taskClicked()">View Task</button>
-            <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+            <button (click)="openViewTaskDialog(item)">View Task</button>
+            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete Task</button>
           </div>
           
         }
@@ -52,8 +53,8 @@
         @for (item of highTasks; track item) {
           <div class="task-item" cdkDrag [cdkDragData]="item">
             {{item.title}}
-            <button (click)="taskClicked()">View Task</button>
-            <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+            <button (click)="openViewTaskDialog(item)">View Task</button>
+            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete Task</button>
           </div>
           
         }
@@ -71,10 +72,9 @@
         @for (item of urgentTasks; track item) {
           <div class="task-item" cdkDrag [cdkDragData]="item">
             {{item.title}}
-            <button (click)="taskClicked()">View Task</button>
-            <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
-          </div>
-          
+            <button (click)="openViewTaskDialog(item)">View Task</button>
+            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete Task</button>
+            </div>
         }
       </div>
     </div>
@@ -91,8 +91,8 @@
         @for (item of inProgressTasks; track item) {
           <div class="task-item" cdkDrag [cdkDragData]="item">
             {{item.title}}
-            <button (click)="taskClicked()">View Task</button>
-            <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+            <button (click)="openViewTaskDialog(item)">View Task</button>
+            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete Task</button>
           </div>
           
         }
@@ -111,10 +111,9 @@
         @for (item of completedTasks; track item) {
           <div class="task-item" cdkDrag [cdkDragData]="item">
             {{item.title}}
-            <button (click)="taskClicked()">View Task</button>
-            <button style="float: right;" (click)="deleteSelectedTask(item.id)">Delete Task</button>
+            <button (click)="openViewTaskDialog(item)">View Task</button>
+            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete Task</button>
           </div>
-          
         }
       </div>
     </div>

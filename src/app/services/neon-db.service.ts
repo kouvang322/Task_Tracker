@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from '../interfaces/Task';
-import { Key } from 'node:readline';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,16 +18,16 @@ export class NeonDbService {
     return this.http.get<Task[]>(`${this.baseUrl}/api/data`);
   }
 
-  createTaskItem(): Observable<Task>{
-    console.log("created new task")
+  createTaskItem(newTask: object): Observable<Task>{
+    console.log(newTask);
     
-    return this.http.post<Task>(`${this.baseUrl}/api/data/createTask`, {});
+    return this.http.post<Task>(`${this.baseUrl}/api/data/createTask`, {newTask});
   }
 
-  taskMoved(taskId: number, task: Task): Observable<Task> {
-    console.log(taskId);
+  taskInfoChanged(task: Task): Observable<Task> {
+    console.log(task);
 
-    return this.http.patch<Task>(`${this.baseUrl}/api/data/updateTask`, {taskId, task})
+    return this.http.patch<Task>(`${this.baseUrl}/api/data/updateTask`, {task})
   }
 
   deleteTask(taskId: number): Observable<Task>{
