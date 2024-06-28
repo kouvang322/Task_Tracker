@@ -1,19 +1,10 @@
 <div>
-  <app-homepage></app-homepage>
-  <div class="header">
-    <h2>Task Tracker</h2>
-  </div>
-
-  <div class="body">
-    <h2>Priority</h2>
-    <div class="priority-box">
-      <app-dashboard></app-dashboard>
-      
-    </div>
-
-    <!-- <h2>Progress</h2>
-    <div class="progress-box">
-      <app-test></app-test>
-    </div> -->
-  </div>
+  <nav>
+    <ul>
+      <li><a routerLink="/Homepage" routerLinkActive="active" ariaCurrentWhenActive="page">Home Page</a></li>
+      <li><a routerLink="/Dashboard" routerLinkActive="active" ariaCurrentWhenActive="page">Dashboard</a></li>
+      <li><a routerLink="/LoginOrRegister" routerLinkActive="active" ariaCurrentWhenActive="page">Login/Register</a></li>
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
 </div>
