@@ -1,17 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ListBoxComponent } from './list-box.component';
 
-describe('ListBoxComponent', () => {
-  let component: ListBoxComponent;
-  let fixture: ComponentFixture<ListBoxComponent>;
+import { LoginOrRegisterComponent } from './login-or-register.component';
+
+describe('LoginOrRegisterComponent', () => {
+  let component: LoginOrRegisterComponent;
+  let fixture: ComponentFixture<LoginOrRegisterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListBoxComponent]
+      imports: [LoginOrRegisterComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ListBoxComponent);
+    fixture = TestBed.createComponent(LoginOrRegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
