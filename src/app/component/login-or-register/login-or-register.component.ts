@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NeonDbService } from '../../services/neon-db.service';
+import { User } from '../../interfaces/User';
 
 @Component({
   selector: 'app-login-or-register',
@@ -9,4 +11,20 @@ import { Component } from '@angular/core';
 })
 export class LoginOrRegisterComponent {
 
+  constructor(private dataService: NeonDbService){}
+  
+  createdUser!: User;
+  createUser(){
+    const testUser: User = {
+      userName: "Kouvang",
+      password: "Test123"
+    }
+    this.dataService.createNewUser(testUser).subscribe((data: User) => {
+      this.createdUser = data;
+      console.log(this.createdUser);
+
+    }, (error) => {
+      console.log(error);
+    });
+  }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task } from '../interfaces/Task';
+import { User } from '../interfaces/User';
 
 
 @Injectable({
@@ -35,6 +36,10 @@ export class NeonDbService {
     // console.log("Delete this task");
     return this.http.delete<Task>(`${this.baseUrl}/api/data/deleteTask/
       ${taskId}`);
+  }
+
+  createNewUser(user: User): Observable<User>{
+    return this.http.post<User>(`${this.baseUrl}/LoginOrRegister/api/data/createUser`, {user});
   }
   
   sayHello(){

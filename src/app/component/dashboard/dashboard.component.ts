@@ -24,7 +24,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Task } from '../../interfaces/Task';
 import { NeonDbService } from '../../services/neon-db.service';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
