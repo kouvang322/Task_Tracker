@@ -38,8 +38,14 @@ export class NeonDbService {
       ${taskId}`);
   }
 
-  createNewUser(user: User): Observable<User>{
-    return this.http.post<User>(`${this.baseUrl}/LoginOrRegister/api/data/createUser`, {user});
+  createNewUser(newUsername: string, newPassword: string): Observable<User>{
+    return this.http.post<User>(`${this.baseUrl}/LoginOrRegister/api/data/register`, {newUsername, newPassword});
+  }
+
+  getUserInfo(username: string, password: string){
+    console.log(username, password);
+
+    return this.http.post<any>(`${this.baseUrl}/LoginOrRegister/api/data/login/user`, {username, password});
   }
   
   sayHello(){
