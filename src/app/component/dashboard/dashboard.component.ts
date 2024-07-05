@@ -24,7 +24,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Task } from '../../interfaces/Task';
 import { NeonDbService } from '../../services/neon-db.service';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -180,7 +179,7 @@ export class DashboardComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
-        this.addNewTask(result);
+        this.addNewTask(result, this.dataService.loggedinUser_Id);
       }else{
         alert("Task Creation cancelled.")
       }
@@ -387,8 +386,8 @@ export class DashboardComponent {
   }
 
   createdTaskData!: Task;
-  addNewTask(newTask: object) {
-    this.dataService.createTaskItem(newTask).subscribe((data: Task) => {
+  addNewTask(newTask: object, userId: Number) {
+    this.dataService.createTaskItem(newTask, userId).subscribe((data: Task) => {
       this.createdTaskData = data;
       console.log(this.createdTaskData);
       this.addTaskToList(this.createdTaskData);
