@@ -29,6 +29,7 @@ export class LoginOrRegisterComponent {
       this.createdUser = data;
       console.log(this.createdUser);
       this.showAccountCreationConfirmation();
+      this.loginUser(userNameInput, passwordInput);
 
     }, (error) => {
       console.log(error);
@@ -41,10 +42,15 @@ export class LoginOrRegisterComponent {
     this.loginUser(form.value.LogInUserName, form.value.LogInPassword)
   }
 
-  
   loginUser(userNameInput: string, passwordInput: string){
     this.dataService.getUserInfo(userNameInput, passwordInput).subscribe(data => {
-      localStorage.setItem('token', data.token)
+      this.dataService.loggedinUsername = data.username;
+      this.dataService.loggedinUser_Id = data.user_id!;
+      
+      console.log(this.dataService.loggedinUsername);
+      console.log(this.dataService.loggedinUser_Id);
+      
+      // localStorage.setItem('token', data.token)
       this.showLoginSuccess();
     },
     (error) => {
