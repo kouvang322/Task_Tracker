@@ -1,17 +1,24 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ListBoxComponent } from './component/Listboxes/list-box/list-box.component';
-import { ListBoxMedComponent } from './component/Listboxes/list-box-med/list-box-med.component';
-import { ListBoxHighComponent } from './component/Listboxes/list-box-high/list-box-high.component';
-import { ListUrgentComponent } from './component/Listboxes/list-urgent/list-urgent.component';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { NeonDbService } from './services/neon-db.service';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { HomepageComponent } from './component/homepage/homepage.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ListBoxComponent, ListBoxMedComponent, ListBoxHighComponent, ListUrgentComponent,],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, HttpClientModule, DashboardComponent, HomepageComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  providers: [NeonDbService]
 })
-export class AppComponent {
+export class AppComponent{
   title = 'Task-Tracker';
+ 
+  constructor(private dataService: NeonDbService, private router: Router) { 
+    
+  }
+  
 }

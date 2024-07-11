@@ -1,21 +1,5 @@
-.list-box{
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 2rem;
-    background-color: white;
-    border-radius: 5px;
-}
-
-.list-box-container{
-    height: 15rem;
-    width: 15rem;
-    overflow-y: scroll;
-    border-radius: 5px;
-    
-
-}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .task-items{
     display: block;

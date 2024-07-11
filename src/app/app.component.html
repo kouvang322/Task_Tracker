@@ -1,50 +1,10 @@
 <div>
-  <div class="header">
-    <h2>Task Tracker</h2>
-    <button>Add New Task</button>
-  </div>
-
-  <div class="body">
-    <h2>Priority</h2>
-    <div class="priority-box">
-      <div class="display-area">
-        <p>Low</p>
-        <app-list-box/>
-      </div>
-
-      <div class="display-area">
-        <p>Medium</p>
-        <app-list-box-med/>
-      </div>
-
-      <div class="display-area">
-        <p>High</p>
-        <app-list-box-high/>
-      </div>
-
-      <div class="display-area">
-        <p>Urgent</p>
-        <app-list-urgent />
-      </div>
-    </div>
-
-    <h2>Progress</h2>
-    <div class="progress-box">
-      <div class="display-area">
-        <p>In-Progress</p>
-        <app-list-box></app-list-box>
-      </div>
-
-      <div class="display-area">
-        <p>Working-On</p>
-        <app-list-box></app-list-box>
-
-      </div>
-
-      <div class="display-area">
-        <p>Completed</p>
-        <app-list-box></app-list-box>
-      </div>
-    </div>
-  </div>
+  <!-- <nav>
+    <ul>
+      <li><a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Home Page</a></li>
+      <li><a routerLink="/Dashboard" routerLinkActive="active" ariaCurrentWhenActive="page">Dashboard</a></li>
+      <li><a routerLink="/LoginOrRegister" routerLinkActive="active" ariaCurrentWhenActive="page">Login/Register</a></li>
+    </ul>
+  </nav> -->
+  <router-outlet></router-outlet>
 </div>

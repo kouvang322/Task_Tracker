@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Create New Task</h2>
+  <mat-dialog-content class="dialog-content">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="data.title" maxlength="15" required>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="data.description" required></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Priority</mat-label>
+    <mat-select [(ngModel)]="data.priority">
+      <mat-option value="low">Low</mat-option>
+      <mat-option value="medium">Medium</mat-option>
+      <mat-option value="high">High</mat-option>
+      <mat-option value="urgent">Urgent</mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions class="action-buttons">
+  <button mat-button style="background-color: green;" (click)="onCreateClicked()">Create Task</button>
+    <button mat-button style="background-color: red;" (click)="onCancelClicked()">Cancel</button>
+  </mat-dialog-actions>
