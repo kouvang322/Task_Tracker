@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { NeonDbService } from './services/neon-db.service';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HomepageComponent } from './component/homepage/homepage.component';
-
 
 
 @Component({
@@ -15,10 +14,11 @@ import { HomepageComponent } from './component/homepage/homepage.component';
   styleUrl: './app.component.css',
   providers: [NeonDbService]
 })
-export class AppComponent {
+export class AppComponent{
   title = 'Task-Tracker';
-
-
-  constructor(private dataService: NeonDbService) { }
+ 
+  constructor(private dataService: NeonDbService, private router: Router) { 
+    
+  }
   
 }

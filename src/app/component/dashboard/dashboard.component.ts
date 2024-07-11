@@ -22,142 +22,67 @@ import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
 import { Task } from '../../interfaces/Task';
 import { NeonDbService } from '../../services/neon-db.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-
-@Component({
-  selector: 'delete-dialog',
-  template: `<h2 mat-dialog-title>Delete This Task?</h2>
-  <mat-dialog-content>Are you sure you want to delete this task?</mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-button style="background-color: red;" (click)="onNoClicked()">No</button>
-    <button mat-button style="background-color: green;" (click)="onYesClicked()">Yes</button>
-  </mat-dialog-actions>`,
-  standalone: true,
-  imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-
-export class DeleteDialog {
-
-  constructor(public dialogRef: MatDialogRef<DeleteDialog>, @Inject(MAT_DIALOG_DATA) public data: { taskId: number }) { }
-
-  onYesClicked() {
-    this.dialogRef.close('yes');
-  }
-  onNoClicked() {
-    this.dialogRef.close('no');
-  }
-}
-
-@Component({
-  selector: 'create-dialog',
-  template: `
-  <h2 mat-dialog-title>Create New Task</h2>
-  <mat-dialog-content>
-    <mat-form-field>
-      <mat-label>Title</mat-label>
-      <input matInput [(ngModel)]="data.title" required>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <textarea matInput [(ngModel)]="data.description" required></textarea>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Priority</mat-label>
-    <mat-select [(ngModel)]="data.priority">
-      <mat-option value="low">Low</mat-option>
-      <mat-option value="medium">Medium</mat-option>
-      <mat-option value="high">High</mat-option>
-      <mat-option value="urgent">Urgent</mat-option>
-    </mat-select>
-  </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions >
-    <button mat-button style="background-color: red;" (click)="onCancelClicked()">Cancel</button>
-    <button mat-button style="background-color: green;" (click)="onCreateClicked()">Create Task</button>
-  </mat-dialog-actions>
-  `,
-  standalone: true,
-  imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-
-export class CreateDialog {
-  form!: FormGroup;
-
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<CreateDialog>, @Inject(MAT_DIALOG_DATA) public data: {title: string, description: string, priority: string}){
-  }
-
-  onCreateClicked(): void{
-    this.dialogRef.close(this.data)
-  }
-  onCancelClicked(): void{
-    this.dialogRef.close();
-  }
-}
-
-@Component({
-  selector: 'view-task-dialog',
-  template: `
-  <h2 mat-dialog-title>View Task</h2>
-  <mat-dialog-content>
-    <mat-form-field>
-      <mat-label>Title</mat-label>
-      <input matInput [(ngModel)]="data.title" required>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <textarea matInput [(ngModel)]="data.description" required></textarea>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Priority</mat-label>
-    <mat-select [(ngModel)]="data.priority">
-      <mat-option value="low">Low</mat-option>
-      <mat-option value="medium">Medium</mat-option>
-      <mat-option value="high">High</mat-option>
-      <mat-option value="urgent">Urgent</mat-option>
-    </mat-select>
-  </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions >
-    <button mat-button style="background-color: red;" (click)="onCloseClicked()">Close</button>
-    <button mat-button style="background-color: green;" (click)="onUpdateTaskClicked()">Update Task</button>
-  </mat-dialog-actions>
-  `,
-  standalone: true,
-  imports: [MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, FormsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-
-export class ViewTaskDialog {
-  form!: FormGroup;
-
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<ViewTaskDialog>, @Inject(MAT_DIALOG_DATA) public data: {id: number, title: string, description: string, priority: string}){
-  }
-
-  onUpdateTaskClicked(): void{
-    // console.log(this.data);
-    this.dialogRef.close(this.data);
-  }
-  onCloseClicked(): void{
-    this.dialogRef.close();
-  }
-}
-
+import { ViewTaskDialog } from '../view-task-dialog/view-task-dialog.component';
+import { CreateDialog } from '../create-dialog/create-dialog.component';
+import { DeleteDialog } from '../delete-dialog/delete-dialog.component';
+import { User } from '../../interfaces/User';
+import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, CdkDropListGroup, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, DeleteDialog,],
+  imports: [CdkDropList, CdkDrag, CdkDropListGroup, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule, DeleteDialog, MatIconModule],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css', '../../../styles.css']
 })
 export class DashboardComponent {
   readonly dialog = inject(MatDialog);
 
+  loggedinUser_Id: Number | null = 0;
+  loggedinUsername: string | null = '';
+  
+  userIsLoggedIn!: Boolean;
+
+  dataList: Task[] = [];
+
+  movedTask?: Task;
+  lowTasks: Task[] = [];
+  medTasks: Task[] = [];
+  highTasks: Task[] = [];
+  urgentTasks: Task[] = [];
+  inProgressTasks: Task[] = [];
+  completedTasks: Task[] = [];
+
+  constructor(private dataService: NeonDbService, private cdRef: ChangeDetectorRef, @Inject(DOCUMENT) private document: Document, private router: Router) {
+    
+    const localStorage = document.defaultView?.localStorage;
+    if(localStorage){
+ 
+      try {
+        
+        this.loggedinUser_Id = Number(localStorage.getItem('user_id'));
+        this.loggedinUsername = localStorage.getItem('username');
+        
+        if (this.loggedinUser_Id && this.loggedinUsername) {
+          this.dataService.setUser({loggedinUser_Id: this.loggedinUser_Id, loggedinUsername: this.loggedinUsername });
+        }
+        
+      } catch (error) {
+        console.log(error);
+      }
+      
+    }
+  }
+  
+  ngOnInit(): void {
+    this.refreshList();
+    this.checkIfUserLoggedIn();
+  }
   openDeleteDialog(taskItem: Task) {
     const dialogRef = this.dialog.open(DeleteDialog, {
       data: { taskId: taskItem.id }
@@ -179,7 +104,7 @@ export class DashboardComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result != null){
-        this.addNewTask(result, this.dataService.loggedinUser_Id);
+        this.addNewTask(result, this.loggedinUser_Id!);
       }else{
         alert("Task Creation cancelled.")
       }
@@ -189,7 +114,7 @@ export class DashboardComponent {
   originalTask!: Task;
   openViewTaskDialog(viewTask: Task) {
     const dialogRef = this.dialog.open(ViewTaskDialog, {
-      data: {id: viewTask.id, title: viewTask.title , description: viewTask.description, priority: viewTask.priority, user_d: viewTask.user_id}
+      data: {id: viewTask.id, title: viewTask.title , description: viewTask.description, priority: viewTask.priority, user_id: viewTask.user_id}
     });
 
     this.originalTask = viewTask;
@@ -197,30 +122,14 @@ export class DashboardComponent {
       if(result != null){
         console.log(result);
         this.removeTaskFromList(this.originalTask, this.originalTask.priority)
-        this.updateTaskInfo(result);
+        console.log(this.loggedinUser_Id);
+        this.updateTaskInfo(result, this.loggedinUser_Id!);
         this.addTaskToList(result);
        
       }else{
         alert("No changes made.")
       }
     })
-  }
-
-  dataList: Task[] = [];
-
-  movedTask?: Task;
-  lowTasks: Task[] = [];
-  medTasks: Task[] = [];
-  highTasks: Task[] = [];
-  urgentTasks: Task[] = [];
-  inProgressTasks: Task[] = [];
-  completedTasks: Task[] = [];
-
-  constructor(private dataService: NeonDbService, private cdRef: ChangeDetectorRef) { }
-
-
-  ngOnInit(): void {
-    this.refreshList();
   }
 
   clearTaskArrays() {
@@ -344,8 +253,8 @@ export class DashboardComponent {
   }
 
   
-  updateTaskInfo(changedTask: Task){
-    this.dataService.taskInfoChanged(changedTask).subscribe(response => {
+  updateTaskInfo(changedTask: Task, loggedinUserId: Number){
+    this.dataService.taskInfoChanged(changedTask, loggedinUserId).subscribe(response => {
       console.log(response); // Handle the response here
     }, (error) => {
       console.log(error);
@@ -371,7 +280,7 @@ export class DashboardComponent {
       this.changeProperty(this.movedTask, b.container.id);
 
       try {
-        this.updateTaskInfo(this.movedTask as Task);
+        this.updateTaskInfo(this.movedTask as Task, this.loggedinUser_Id!);
       } catch (error) {
         console.log(error)
       }
@@ -427,9 +336,24 @@ export class DashboardComponent {
     );
   }
 
-  deleteTask(task: Task) {
-    console.log(task);
+  checkIfUserLoggedIn(){
+    this.userIsLoggedIn = this.dataService.userLoggedIn();
+  }
+  
+  logoutUser(){
+    this.dataService.logout();
+    this.checkIfUserLoggedIn();
+    this.successfullLogout();
+  }
+  
+  successfullLogout(){
+    alert("You have logged out.");
+    this.router.navigate(['/']);
   }
 
+  goToLoginPage(){
+    this.router.navigate(['/LoginOrRegister']);
+  }
 }
+ 
 
