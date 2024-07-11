@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Task } from '../interfaces/Task';
 import { User } from '../interfaces/User';
 
@@ -12,18 +12,44 @@ export class NeonDbService {
 
   private baseUrl = 'http://localhost:3000';
 
-  public loggedinUsername = "";
-  public loggedinUser_Id = 0;
+  // public loggedinUsername = "";
+  // public loggedinUser_Id = 0;
+  private user: {loggedinUser_Id: Number, loggedinUsername: string} | null = null;
 
+  setUser(user: { loggedinUser_Id: Number, loggedinUsername: string }) {
+    this.user = user;
+  }
+
+  userLoggedIn(){
+    if(this.user === null){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  // getUser(){
+  //   this.user;
+  // }
 
   constructor(private http: HttpClient) {}
 
   getData(): Observable<Task[]> {
-    // return this.http.get<any>(`${this.baseUrl}/api/data`);
-    // console.log(this.loggedinUser_Id);
-
-    return this.http.get<Task[]>(`${this.baseUrl}/Dashboard/api/data/${this.loggedinUser_Id}`);
+    if (this.user) {
+      const userId = this.user.loggedinUser_Id;
+      if (userId) {
+        console.log(userId);
+        return this.http.get<Task[]>(`${this.baseUrl}/Dashboard/api/data/${userId}`);
+      } else {
+        console.error('User ID is not defined');
+        return of([]); // Return an empty array as an observable
+      }
+    } else {
+      console.error('User is not defined');
+      return of([]); // Return an empty array as an observable
+    }
   }
+  
 
   createTaskItem(newTask: object, userId: Number): Observable<Task>{
     console.log(newTask);
@@ -31,10 +57,10 @@ export class NeonDbService {
     return this.http.post<Task>(`${this.baseUrl}/Dashboard/api/data/createTask`, {newTask, userId});
   }
 
-  taskInfoChanged(task: Task): Observable<Task> {
-    console.log(task);
+  taskInfoChanged(task: Task, user_id: Number): Observable<Task> {
+    console.log(user_id);
 
-    return this.http.patch<Task>(`${this.baseUrl}/Dashboard/api/data/updateTask`, {task})
+    return this.http.patch<Task>(`${this.baseUrl}/Dashboard/api/data/updateTask`, {task, user_id})
   }
 
   deleteTask(taskId: number): Observable<Task>{
@@ -48,12 +74,12 @@ export class NeonDbService {
   }
 
   getUserInfo(username: string, password: string): Observable<User>{
-
     return this.http.post<User>(`${this.baseUrl}/LoginOrRegister/api/data/login/user`, {username, password});
   }
   
-  sayHello(){
-    console.log("hi, you are connected to service");
+  logout(){
+    this.user = null;
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('username');
   }
-
 }

@@ -1,26 +1,35 @@
-<div style="display: flex; justify-content: space-around;">
-    <div style="float: left;">
-        <h1>Log In</h1>
-        <form (ngSubmit)="onLoginSubmit(loginForm)" #loginForm="ngForm">
-            <label for="LogInUserName">UserName: </label>
-            <input type="text" id="LogInUserName" name="LogInUserName" ngModel required>
-            <label for="LogInPassword">Password: </label>
-            <input type="text" id="LogInPassword" name="LogInPassword" ngModel required>
-            <button type="submit">Log In</button>
-        </form>
+<div>
+    <div class="formTitles">
+        <h1 class="titleText">Log In</h1>
+        <h1>or</h1>
+        <h1 class="titleText">Register</h1>
+    </div>
+    <div class="loginRegisterLayout" >
+        <div class="formDisplay">
+            <form (ngSubmit)="onLoginSubmit(loginForm)" #loginForm="ngForm">
+                <label for="LogInUserName">User Name: </label>
+                <input type="text" id="LogInUserName" name="LogInUserName" ngModel required autocomplete="off">
+                <label for="LogInPassword">Password: </label>
+                <input type="password" id="LogInPassword" name="LogInPassword" ngModel required autocomplete="off">
+                <button type="submit">Log In</button>
+            </form>
+    
+        </div>
+        <div>
+            <hr width="1" size="500">
+        </div>
+        <div class="formDisplay">
+            <form  (ngSubmit)="onRegisterSubmit(registerForm)" #registerForm="ngForm">
+                <label for="RegisterUserName">User Name: </label>
+                <input type="text" id="RegisterUserName" name="RegisterUserName" ngModel required autocomplete="off">
+                <label for="RegisterPassword">Password: </label>
+                <input type="password" id="RegisterPassword" name="RegisterPassword" ngModel required autocomplete="off">
+                <label for="ConfirmPassword">Confirm Password:</label>
+                <input type="password" id="ConfirmPassword" name="ConfirmPassword" ngModel required autocomplete="off">
 
+                <button type="submit">Register</button>
+            </form>
+        </div>
     </div>
-    <div>
-        <hr width="1" size="500">
-    </div>
-    <div style="float: right;">
-        <h1>Register</h1>
-        <form (ngSubmit)="onRegisterSubmit(registerForm)" #registerForm="ngForm">
-            <label for="RegisterUserName">User Name: </label>
-            <input type="text" id="RegisterUserName" name="RegisterUserName" ngModel required>
-            <label for="RegisterPassword">Password: </label>
-            <input type="text" id="RegisterPassword" name="RegisterPassword" ngModel required>
-            <button type="submit">Register</button>
-        </form>
-    </div>
+    
 </div>

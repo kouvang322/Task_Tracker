@@ -1,0 +1,12 @@
+h2{
+    width: 40rem;
+}
+
+.dialog-content{
+    display: flex;
+    flex-flow: column;
+}
+
+.action-buttons{
+    justify-content: end;
+}

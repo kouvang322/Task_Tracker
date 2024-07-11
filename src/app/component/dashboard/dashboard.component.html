@@ -1,110 +1,113 @@
 <div class="header">
-  <h2>Task Tracker</h2>
+  <div class="title-and-buttons">
+    <h1>Task Tracker</h1>
+    @if(userIsLoggedIn === true){
     <button mat-button style="background-color: green
-;" (click)="openCreateDialog()">Add New Task</button>
+        ;" (click)="openCreateDialog()">Add New Task</button>
+    }@else{
+    <button mat-button style="background-color: green
+        ;" (click)="openCreateDialog()" disabled="true">Add New Task</button>
+    }
+  
+    @if(userIsLoggedIn === true){
+    <button mat-button class="login-or-logout-button" (click)="logoutUser()">Log out</button>
+    }@else {
+    <button mat-button class="login-or-logout-button" (click)="goToLoginPage()">Log In</button>
+    }
+  </div>
 </div>
-
 <div class="body">
-  <h2>Priority</h2>
   <div class="priority-box">
     <div cdkDropListGroup>
+      <h1 class="grouping-title">Priority</h1>
+      <div class="priority-group">
+        <div class="priority-container">
+          <h2>Low</h2>
+          <div cdkDropList id="low" [cdkDropListData]="lowTasks" class="task-list" (cdkDropListDropped)="drop($event)">
+            @for (item of lowTasks; track item) {
+            <div class="task-item low" cdkDrag [cdkDragData]="item">
+              {{item.title}}
+              <button mat-button (click)="openViewTaskDialog(item)" style="background-color:grey">View</button>
+              <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete</button>
 
-      <div class="priority-container">
-        <h2>Low</h2>
-
-        <div cdkDropList id="low" [cdkDropListData]="lowTasks" class="task-list" (cdkDropListDropped)="drop($event)">
-          @for (item of lowTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item">
-            {{item.title}}
-            <button (click)="openViewTaskDialog(item)">View Task</button>
-            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete
-              Task</button>
+            </div>
+            }
           </div>
-          }
         </div>
 
-      </div>
-
-      <div class="priority-container">
-        <h2>Medium</h2>
-
-        <div cdkDropList id="medium" [cdkDropListData]="medTasks" class="task-list" (cdkDropListDropped)="drop($event)">
-          @for (item of medTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item">
-            {{item.title}}
-            <button (click)="openViewTaskDialog(item)">View Task</button>
-            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete
-              Task</button>
+        <div class="priority-container">
+          <h2>Medium</h2>
+          <div cdkDropList id="medium" [cdkDropListData]="medTasks" class="task-list"
+            (cdkDropListDropped)="drop($event)">
+            @for (item of medTasks; track item) {
+            <div class="task-item medium" cdkDrag [cdkDragData]="item">
+              {{item.title}}
+              <button mat-button (click)="openViewTaskDialog(item)" style="background-color:grey">View</button>
+              <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete</button>
+            </div>
+            }
           </div>
-
-          }
         </div>
-      </div>
-      <div class="priority-container">
-        <h2>High</h2>
 
-        <div cdkDropList id="high" [cdkDropListData]="highTasks" class="task-list" (cdkDropListDropped)="drop($event)">
-          @for (item of highTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item">
-            {{item.title}}
-            <button (click)="openViewTaskDialog(item)">View Task</button>
-            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete
-              Task</button>
+        <div class="priority-container">
+          <h2>High</h2>
+          <div cdkDropList id="high" [cdkDropListData]="highTasks" class="task-list"
+            (cdkDropListDropped)="drop($event)">
+            @for (item of highTasks; track item) {
+            <div class="task-item high" cdkDrag [cdkDragData]="item">
+              {{item.title}}
+              <button mat-button (click)="openViewTaskDialog(item)" style="background-color:grey">View</button>
+              <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete</button>
+            </div>
+            }
           </div>
-
-          }
         </div>
-      </div>
-      <div class="priority-container">
-        <h2>Urgent</h2>
 
-        <div cdkDropList id="urgent" [cdkDropListData]="urgentTasks" class="task-list"
-          (cdkDropListDropped)="drop($event)">
-          @for (item of urgentTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item">
-            {{item.title}}
-            <button (click)="openViewTaskDialog(item)">View Task</button>
-            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete
-              Task</button>
+        <div class="priority-container">
+          <h2>Urgent</h2>
+          <div cdkDropList id="urgent" [cdkDropListData]="urgentTasks" class="task-list"
+            (cdkDropListDropped)="drop($event)">
+            @for (item of urgentTasks; track item) {
+            <div class="task-item urgent" cdkDrag [cdkDragData]="item">
+              {{item.title}}
+              <button mat-button (click)="openViewTaskDialog(item)" style="background-color:grey">View</button>
+              <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete</button>
+            </div>
+            }
           </div>
-          }
         </div>
       </div>
 
-      <div class="priority-container">
-        <h2>In Progress</h2>
-
-        <div cdkDropList id="inProgress" [cdkDropListData]="inProgressTasks" class="task-list"
-          (cdkDropListDropped)="drop($event)">
-          @for (item of inProgressTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item">
-            {{item.title}}
-            <button (click)="openViewTaskDialog(item)">View Task</button>
-            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete
-              Task</button>
+      <h1 class="grouping-title">Progress</h1>
+      <div class="progress-group">
+        <div class="priority-container">
+          <h2>In Progress</h2>
+          <div cdkDropList id="inProgress" [cdkDropListData]="inProgressTasks" class="task-list"
+            (cdkDropListDropped)="drop($event)">
+            @for (item of inProgressTasks; track item) {
+            <div class="task-item" cdkDrag [cdkDragData]="item">
+              {{item.title}}
+              <button mat-button (click)="openViewTaskDialog(item)" style="background-color:grey">View</button>
+              <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete</button>
+            </div>
+            }
           </div>
+        </div>
 
-          }
+        <div class="priority-container">
+          <h2>Completed</h2>
+          <div cdkDropList id="completed" [cdkDropListData]="completedTasks" class="task-list"
+            (cdkDropListDropped)="drop($event)">
+            @for (item of completedTasks; track item) {
+            <div class="task-item" cdkDrag [cdkDragData]="item">
+              {{item.title}}
+              <button mat-button (click)="openViewTaskDialog(item)" style="background-color:grey">View</button>
+              <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete</button>
+            </div>
+            }
+          </div>
         </div>
       </div>
-
-      <div class="priority-container">
-        <h2>Completed</h2>
-
-        <div cdkDropList id="completed" [cdkDropListData]="completedTasks" class="task-list"
-          (cdkDropListDropped)="drop($event)">
-          @for (item of completedTasks; track item) {
-          <div class="task-item" cdkDrag [cdkDragData]="item">
-            {{item.title}}
-            <button (click)="openViewTaskDialog(item)">View Task</button>
-            <button mat-button style="float: right;background-color: red;" (click)="openDeleteDialog(item)">Delete
-              Task</button>
-          </div>
-          }
-        </div>
-      </div>
-
     </div>
-
   </div>
 </div>
