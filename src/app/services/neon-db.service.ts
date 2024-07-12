@@ -11,7 +11,7 @@ import { User } from '../interfaces/User';
 export class NeonDbService {
 
   // private baseUrl = 'http://localhost:3000';
-  private baseUrl = 'https://task-tracking-5540ce844d83.herokuapp.com/';
+  private baseUrl = 'https://task-tracking-5540ce844d83.herokuapp.com';
 
   // public loggedinUsername = "";
   // public loggedinUser_Id = 0;
