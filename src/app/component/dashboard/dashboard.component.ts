@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, inject, Inject, } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Inject, } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import {
   CdkDragDrop,
@@ -10,26 +10,17 @@ import {
 } from '@angular/cdk/drag-drop';
 import {
   MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogTitle,
-  MatDialogContent,
-  MatDialogActions,
-  MatDialogClose,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import { Task } from '../../interfaces/Task';
 import { NeonDbService } from '../../services/neon-db.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewTaskDialog } from '../view-task-dialog/view-task-dialog.component';
 import { CreateDialog } from '../create-dialog/create-dialog.component';
 import { DeleteDialog } from '../delete-dialog/delete-dialog.component';
-import { User } from '../../interfaces/User';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 
