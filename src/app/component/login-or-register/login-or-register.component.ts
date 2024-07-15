@@ -76,6 +76,7 @@ export class LoginOrRegisterComponent implements OnInit {
       localStorage.setItem('username', data.username);
 
       this.showLoginSuccess();
+      this.router.navigate(['/Dashboard']);
     },
       (error) => {
         console.error('Error logging in', error);
@@ -85,12 +86,10 @@ export class LoginOrRegisterComponent implements OnInit {
 
   showAccountCreationConfirmation() {
     alert("Account created");
-    this.router.navigate(['/Dashboard']);
   }
 
   showLoginSuccess() {
     alert("Login successful.");
     this.dataService.userLoggedIn();
-    this.router.navigate(['/Dashboard']);
   }
 }

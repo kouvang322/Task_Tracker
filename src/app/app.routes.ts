@@ -6,6 +6,6 @@ import { LoginOrRegisterComponent } from './component/login-or-register/login-or
 export const routes: Routes = [
     {path: '', component: HomepageComponent},
     {path: 'Dashboard', component: DashboardComponent},
-    {path: 'LoginOrRegister', component: LoginOrRegisterComponent,},
-    { path: '**', redirectTo: '', pathMatch: 'full' } 
+    {path: 'LoginOrRegister', component: LoginOrRegisterComponent},
+    {path: '**', redirectTo: '', pathMatch: 'full' } 
 ];
