@@ -3,18 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Task } from '../interfaces/Task';
 import { User } from '../interfaces/User';
-
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NeonDbService {
 
-  // private baseUrl = 'http://localhost:3000';
-  private baseUrl = 'https://task-tracking-5540ce844d83.herokuapp.com';
+  private baseUrl = environment.baseUrl;
 
-  // public loggedinUsername = "";
-  // public loggedinUser_Id = 0;
   private user: {loggedinUser_Id: Number, loggedinUsername: string} | null = null;
 
   setUser(user: { loggedinUser_Id: Number, loggedinUsername: string }) {
