@@ -37,7 +37,7 @@ export class NeonDbService {
       const userId = this.user.loggedinUser_Id;
       if (userId) {
         console.log(userId);
-        return this.http.get<Task[]>(`${this.baseUrl}/Dashboard/api/data/${userId}`);
+        return this.http.get<Task[]>(`${this.baseUrl}/dashboard/api/data/${userId}`);
       } else {
         console.error('User ID is not defined');
         return of([]); // Return an empty array as an observable
@@ -52,27 +52,27 @@ export class NeonDbService {
   createTaskItem(newTask: object, userId: Number): Observable<Task>{
     console.log(newTask);
     
-    return this.http.post<Task>(`${this.baseUrl}/Dashboard/api/data/createTask`, {newTask, userId});
+    return this.http.post<Task>(`${this.baseUrl}/dashboard/api/data/createTask`, {newTask, userId});
   }
 
   taskInfoChanged(task: Task, user_id: Number): Observable<Task> {
     console.log(user_id);
 
-    return this.http.patch<Task>(`${this.baseUrl}/Dashboard/api/data/updateTask`, {task, user_id})
+    return this.http.patch<Task>(`${this.baseUrl}/dashboard/api/data/updateTask`, {task, user_id})
   }
 
   deleteTask(taskId: number): Observable<Task>{
     console.log(taskId);
     // console.log("Delete this task");
-    return this.http.delete<Task>(`${this.baseUrl}/Dashboard/api/data/deleteTask/${taskId}`);
+    return this.http.delete<Task>(`${this.baseUrl}/dashboard/api/data/deleteTask/${taskId}`);
   }
 
   createNewUser(username: string, password: string): Observable<User>{
-    return this.http.post<User>(`${this.baseUrl}/LoginOrRegister/api/data/register`, {username, password});
+    return this.http.post<User>(`${this.baseUrl}/loginOrRegister/api/data/register`, {username, password});
   }
 
   getUserInfo(username: string, password: string): Observable<User>{
-    return this.http.post<User>(`${this.baseUrl}/LoginOrRegister/api/data/login/user`, {username, password});
+    return this.http.post<User>(`${this.baseUrl}/loginOrRegister/api/data/login/user`, {username, password});
   }
   
   logout(){
