@@ -43,4 +43,4 @@ Thumbs.db
 package-lock.json
 
 # Angular environment files
-/src/environments/environment*.ts
+environment.ts
