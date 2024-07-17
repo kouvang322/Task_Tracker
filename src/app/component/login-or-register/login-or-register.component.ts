@@ -35,7 +35,7 @@ export class LoginOrRegisterComponent implements OnInit {
     const isUserLoggedIn = this.dataService.userLoggedIn();
     console.log(isUserLoggedIn);
     if (isUserLoggedIn) {
-      this.router.navigate(['/Dashboard']);
+      this.router.navigate(['/dashboard']);
     }
   }
 
@@ -76,7 +76,7 @@ export class LoginOrRegisterComponent implements OnInit {
       localStorage.setItem('username', data.username);
 
       this.showLoginSuccess();
-      this.router.navigate(['/Dashboard']);
+      this.router.navigate(['/dashboard']);
     },
       (error) => {
         console.error('Error logging in', error);
