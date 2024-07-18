@@ -67,8 +67,8 @@ export class NeonDbService {
     return this.http.delete<Task>(`${this.baseUrl}/dashboard/api/data/deleteTask/${taskId}`);
   }
 
-  createNewUser(username: string, password: string): Observable<User>{
-    return this.http.post<User>(`${this.baseUrl}/loginOrRegister/api/data/register`, {username, password});
+  createNewUser(username: string, password: string): Observable<Boolean>{
+    return this.http.post<Boolean>(`${this.baseUrl}/loginOrRegister/api/data/register`, {username, password});
   }
 
   getUserInfo(username: string, password: string): Observable<User>{
