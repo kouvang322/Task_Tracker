@@ -343,7 +343,7 @@ export class DashboardComponent {
   }
 
   goToLoginPage(){
-    this.router.navigate(['/loginOrRegister']);
+    this.router.navigate(['/loginorregister']);
   }
 }
  
