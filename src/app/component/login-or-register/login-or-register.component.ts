@@ -86,11 +86,17 @@ export class LoginOrRegisterComponent implements OnInit {
 
   loginUser(userNameInput: string, passwordInput: string) {
     this.dataService.getUserInfo(userNameInput, passwordInput).subscribe(data => {
-      localStorage.setItem('user_id', (data.user_id!).toString());
-      localStorage.setItem('username', data.username);
+      
+      if(!data.success){
+        alert(data.message);
+      }else{
+        localStorage.setItem('user_id', (data.user_id!).toString());
+        localStorage.setItem('username', data.username);
+  
+        this.showLoginSuccess();
+        this.router.navigate(['/dashboard']);
+      }
 
-      this.showLoginSuccess();
-      this.router.navigate(['/dashboard']);
     },
       (error) => {
         console.error('Error logging in', error);

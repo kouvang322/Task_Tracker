@@ -71,8 +71,8 @@ export class NeonDbService {
     return this.http.post<Boolean>(`${this.baseUrl}/loginOrRegister/api/data/register`, {username, password});
   }
 
-  getUserInfo(username: string, password: string): Observable<User>{
-    return this.http.post<User>(`${this.baseUrl}/loginOrRegister/api/data/login/user`, {username, password});
+  getUserInfo(username: string, password: string): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}/loginOrRegister/api/data/login/user`, {username, password});
   }
   
   logout(){
