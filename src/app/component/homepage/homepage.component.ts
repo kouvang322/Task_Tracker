@@ -13,6 +13,6 @@ export class HomepageComponent {
   constructor(private router: Router){}
 
   GoToLoginOrRegisterPage(){
-    this.router.navigate(['/LoginOrRegister'])
+    this.router.navigate(['/loginOrRegister']);
   }
 }
