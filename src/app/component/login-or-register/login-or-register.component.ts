@@ -41,23 +41,37 @@ export class LoginOrRegisterComponent implements OnInit {
 
   onRegisterSubmit(form: NgForm) {
     //trying to submit the form with the while getting the inputs to use as a user value.
-    if (form.value.RegisterPassword === form.value.ConfirmPassword) {
-      this.createUser(form.value.RegisterUserName, form.value.RegisterPassword)
-    } else {
-      alert("Passwords do not match.");
+    if(form.value.RegisterUserName.length < 5 || form.value.RegisterUserName.length > 15){
+      alert("Username must be between 5 and 15 characters long");
+    }else{
+      if(form.value.RegisterPassword.length < 5 || form.value.RegisterPassword.length > 15){
+        alert("Password must be between 5 and 15 characters long");
+      }else{
+        if (form.value.RegisterPassword === form.value.ConfirmPassword) {
+          this.createUser(form.value.RegisterUserName, form.value.RegisterPassword)
+        } else {
+          alert("Passwords do not match.");
+        }
+      }
     }
   }
 
-  createdUser!: User;
   createUser(userNameInput: string, passwordInput: string) {
 
     // console.log(userNameInput);
     // console.log(passwordInput);
     this.dataService.createNewUser(userNameInput, passwordInput).subscribe((data) => {
-      this.createdUser = data;
-      console.log(this.createdUser);
-      this.showAccountCreationConfirmation();
-      this.loginUser(userNameInput, passwordInput);
+      const canCreateUser = data;
+      // console.log("Value of canCreateUser:", canCreateUser);
+      // console.log("Type of canCreateUser:", typeof canCreateUser);
+
+      if(canCreateUser === true){
+        // console.log("user created")
+        this.showAccountCreationConfirmation();
+        this.loginUser(userNameInput, passwordInput);
+      }else{
+        alert("Username is not available");
+      }
 
     }, (error) => {
       console.log(error);

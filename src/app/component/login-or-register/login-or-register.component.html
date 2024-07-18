@@ -21,9 +21,9 @@
         <div class="formDisplay">
             <form  (ngSubmit)="onRegisterSubmit(registerForm)" #registerForm="ngForm">
                 <label for="RegisterUserName">User Name: </label>
-                <input type="text" id="RegisterUserName" name="RegisterUserName" ngModel required autocomplete="off">
+                <input type="text" id="RegisterUserName" name="RegisterUserName" maxlength="15" minlength="5" ngModel required autocomplete="off">
                 <label for="RegisterPassword">Password: </label>
-                <input type="password" id="RegisterPassword" name="RegisterPassword" ngModel required autocomplete="off">
+                <input type="password" id="RegisterPassword" name="RegisterPassword" maxlength="15" minlength="5" ngModel required autocomplete="off">
                 <label for="ConfirmPassword">Confirm Password:</label>
                 <input type="password" id="ConfirmPassword" name="ConfirmPassword" ngModel required autocomplete="off">
 
